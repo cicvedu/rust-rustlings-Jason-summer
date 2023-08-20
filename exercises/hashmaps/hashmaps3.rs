@@ -39,6 +39,13 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
         // will be the number of goals conceded from team_2, and similarly
         // goals scored by team_2 will be the number of goals conceded by
         // team_1.
+        let team_1 = scores.get_mut(&team_1_name).unwrap_or_else(|| panic!("Team {} not found", team_1_name));
+        let team_2 = scores.get_mut(&team_2_name).unwrap_or_else(|| panic!("Team {} not found", team_2_name));
+               
+        team_1.goals_scored += team_1_score;
+        team_1.goals_conceded += team_2_score;
+        team_2.goals_scored += team_2_score;
+        team_2.goals_conceded += team_1_score;
     }
     scores
 }
